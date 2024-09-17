@@ -1,4 +1,3 @@
-## pipeline with multiple stages
 pipeline {
     agent any
 
@@ -11,7 +10,7 @@ pipeline {
         stage('pull') {
             steps {
                 // Get some code from a GitHub repository
-                git credentialsId: 'git', url: '{your repo details}'
+                git credentialsId: 'git', url: 'git@github.com:sathishbob/jenkins_test.git'
                 }
         }
         
@@ -20,3 +19,18 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true -f api-gateway/ clean package"
             }
         }
+
+        stage('publish') {
+            steps {
+                junit stdioRetention: '', testResults: 'api-gateway/target/surefire-reports/*.xml'
+                archiveArtifacts artifacts: 'api-gateway/target/*.jar', followSymlinks: false
+            }
+        }
+
+        stage('print') {
+            steps {
+                sh "echo testing"
+            }
+        }
+    }
+}
