@@ -1,12 +1,3 @@
-stdioRetention: '', testResults: 'api-gateway/target/surefire-reports/*.xml'
-                    archiveArtifacts artifacts: 'api-gateway/target/*.jar', followSymlinks: false
-                }
-            }
-        }
-    }
-}
-
-
 ## pipeline with multiple stages
 pipeline {
     agent any
