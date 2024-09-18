@@ -25,9 +25,10 @@ pipeline {
                 archiveArtifacts artifacts: 'api-gateway/target/*.jar', followSymlinks: false
             }
         }
-        agent {
-            label 'linux'}
+        
         stage('print') {
+            agent {
+            label 'linux'}
             steps {
                 sh "echo testing"
             }
